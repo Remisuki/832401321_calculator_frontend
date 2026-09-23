@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f6f2" />
+    <meta name="description" content="支持括号、小数与历史记录的在线计算器。" />
+    <title>算页 · 每一步都有记录</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./config.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="workspace">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="算页首页">
+          <span class="brand-mark" aria-hidden="true">=</span>
+          <span>算页<span class="brand-caption">CALCULATOR</span></span>
+        </a>
+        <span id="connection" class="connection" role="status" data-state="loading">
+          正在连接
+        </span>
+      </header>
+
+      <div class="intro">
+        <div>
+          <p class="eyebrow">MAKE EVERY NUMBER COUNT</p>
+          <h1>把每一步，算清楚。</h1>
+          <p class="subtitle">从一个简单算式开始，留下每一次计算的记录。</p>
+        </div>
+        <p class="feature-note">四则运算<span> / </span>括号<span> / </span>小数</p>
+      </div>
+
+      <div class="panels">
+        <section class="calculator-card" aria-label="计算器">
+          <form id="calculator-form">
+            <div class="display">
+              <label for="expression">输入表达式</label>
+              <input id="expression" name="expression" type="text"
+                placeholder="例如 (12 + 8) ÷ 4" maxlength="200"
+                autocomplete="off" autocapitalize="off" spellcheck="false"
+                aria-describedby="input-hint" />
+              <div class="result-caption">
+                <span id="result-label">等待计算</span>
+                <span class="result-dot" aria-hidden="true"></span>
+              </div>
+              <output id="result" for="expression">—</output>
+            </div>
+
+            <div id="keypad" class="keypad" aria-label="计算器按键">
+              <button type="button" data-action="clear" class="key utility"
+                aria-label="清空表达式">AC</button>
+              <button type="button" data-value="(" class="key utility" aria-label="左括号">(</button>
+              <button type="button" data-value=")" class="key utility" aria-label="右括号">)</button>
+              <button type="button" data-action="backspace" class="key utility"
+                aria-label="退格，删除光标前一个字符">⌫</button>
+              <button type="button" data-value="7" class="key">7</button>
+              <button type="button" data-value="8" class="key">8</button>
+              <button type="button" data-value="9" class="key">9</button>
+              <button type="button" data-value="÷" class="key operator" aria-label="除号">÷</button>
+              <button type="button" data-value="4" class="key">4</button>
+              <button type="button" data-value="5" class="key">5</button>
+              <button type="button" data-value="6" class="key">6</button>
+              <button type="button" data-value="×" class="key operator" aria-label="乘号">×</button>
+              <button type="button" data-value="1" class="key">1</button>
+              <button type="button" data-value="2" class="key">2</button>
+              <button type="button" data-value="3" class="key">3</button>
+              <button type="button" data-value="-" class="key operator" aria-label="减号">−</button>
+              <button type="button" data-value="0" class="key">0</button>
+              <button type="button" data-value="." class="key" aria-label="小数点">.</button>
+              <button id="calculate-button" type="submit" class="key equals"
+                aria-label="计算结果">=</button>
+              <button type="button" data-value="+" class="key operator" aria-label="加号">+</button>
+            </div>
+          </form>
+          <p id="input-hint" class="keyboard-hint">
+            <kbd>Enter</kbd> 计算 <span>·</span> <kbd>Esc</kbd> 清空
+          </p>
+          <p id="message" class="message" role="status" aria-live="polite">
+            支持键盘输入，也可以点击上方按键。
+          </p>
+        </section>
+
+        <section class="history-card" aria-labelledby="history-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">YOUR CALCULATIONS</p>
+              <h2 id="history-title">计算记录 <span id="history-count" class="count">0</span></h2>
+            </div>
+            <button id="refresh-history" class="text-button" type="button">↻ 刷新</button>
+          </div>
+          <p class="history-description">成功计算会自动保存。点击算式，可以再次使用。</p>
+          <p id="history-status" class="history-status" role="status" aria-live="polite"></p>
+          <div id="history-list" class="history-list" aria-busy="true">
+            <div class="empty-state"><span class="empty-icon" aria-hidden="true">…</span>
+              <p>正在读取记录</p><small>请稍候</small></div>
+          </div>
+          <nav class="pagination" aria-label="历史记录分页">
+            <button id="previous-page" type="button" class="page-button" disabled>上一页</button>
+            <span id="page-label">第 1 / 1 页</span>
+            <button id="next-page" type="button" class="page-button" disabled>下一页</button>
+          </nav>
+        </section>
+      </div>
+      <footer class="footer">
+        <span>算页 · 每一步都有记录</span>
+        <span>支持最多 200 个字符的表达式</span>
+      </footer>
+    </main>
+  </body>
+</html>
